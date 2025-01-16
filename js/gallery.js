@@ -86,4 +86,13 @@ gallery.insertAdjacentHTML("afterbegin", galleryMarkup);
 
 gallery.addEventListener("click", (event) => {
   event.preventDefault();
+  selectImage(event);
 });
+
+function selectImage(event) {
+  if (event.target.nodeName !== "IMG") {
+    return alert`please choose image`;
+  }
+  const imageSource = event.target.dataset.source;
+  console.log(imageSource);
+}
