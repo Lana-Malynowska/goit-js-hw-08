@@ -84,15 +84,17 @@ const galleryMarkup = images
 
 gallery.insertAdjacentHTML("afterbegin", galleryMarkup);
 
-gallery.addEventListener("click", (event) => {
+function onGalleryClick(event) {
   event.preventDefault();
-  selectImage(event);
-});
+  const image = event.target;
+  if (!image.classList.contains("gallery-image")) return;
 
-function selectImage(event) {
-  if (event.target.nodeName !== "IMG") {
-    return alert`please choose image`;
-  }
-  const imageSource = event.target.dataset.source;
-  console.log(imageSource);
+  openModal(image.dataset.source, image.alt);
 }
+
+function openModal(src, alt) {
+  const instance = basicLightbox.create(`<img src="${src}" alt="${alt}" />`);
+  instance.show();
+}
+
+gallery.addEventListener("click", onGalleryClick);
